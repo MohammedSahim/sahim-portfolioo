@@ -1,429 +1,312 @@
 /* ══════════════════════════════════════════════════════════════════════
-   MOHAMMED SAHIM — ACID BRUTAL PORTFOLIO  |  script.js
-   Pure Vanilla JS — No frameworks, no libraries
+   MOHAMMED SAHIM — ACID BRUTAL PORTFOLIO JAVASCRIPT
+   Pure Vanilla JS — Animations, Interactive Matrix, Project Modal & Soundless Interactions
    ══════════════════════════════════════════════════════════════════════ */
 
 'use strict';
 
-/* ══════════════════════════════════════
-   1. LOADER
-══════════════════════════════════════ */
-(function initLoader() {
-  const loader = document.getElementById('loader');
-  if (!loader) return;
+document.addEventListener('DOMContentLoaded', () => {
 
-  // Hide loader after page ready + short delay
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      loader.classList.add('hidden');
-      document.body.style.overflow = 'visible';
-    }, 1800);
-  });
+  /* ══════════════════════════════════════
+     01. CUSTOM ACID CURSOR
+  ══════════════════════════════════════ */
+  const cursor = document.getElementById('acidCursor');
+  const cursorDot = document.getElementById('acidCursorDot');
 
-  // Fallback
-  setTimeout(() => {
-    loader.classList.add('hidden');
-  }, 3500);
-})();
+  if (cursor && cursorDot && window.matchMedia('(hover: hover)').matches) {
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let cursorX = mouseX;
+    let cursorY = mouseY;
 
-/* ══════════════════════════════════════
-   2. CUSTOM CURSOR
-══════════════════════════════════════ */
-(function initCursor() {
-  const cursor   = document.getElementById('cursor');
-  const follower = document.getElementById('cursorFollower');
-  if (!cursor || !follower) return;
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursorDot.style.left = `${mouseX}px`;
+      cursorDot.style.top = `${mouseY}px`;
+    });
 
-  let mouseX = -100, mouseY = -100;
-  let followerX = -100, followerY = -100;
-  let raf;
+    function renderCursor() {
+      cursorX += (mouseX - cursorX) * 0.18;
+      cursorY += (mouseY - cursorY) * 0.18;
+      cursor.style.left = `${cursorX}px`;
+      cursor.style.top = `${cursorY}px`;
+      requestAnimationFrame(renderCursor);
+    }
+    requestAnimationFrame(renderCursor);
 
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    cursor.style.left = mouseX + 'px';
-    cursor.style.top  = mouseY + 'px';
-  });
-
-  // Smooth follower via rAF
-  function animateFollower() {
-    followerX += (mouseX - followerX) * 0.1;
-    followerY += (mouseY - followerY) * 0.1;
-    follower.style.left = followerX + 'px';
-    follower.style.top  = followerY + 'px';
-    raf = requestAnimationFrame(animateFollower);
+    // Hover effect on clickable elements
+    const hoverables = document.querySelectorAll('a, button, .project-entry, .matrix-cell, .work-together-btn');
+    hoverables.forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+    });
   }
-  animateFollower();
 
-  // Hover effect on interactive elements
-  const hoverEls = document.querySelectorAll('a, button, .cta-button, .project-item, .mockup-window, .tools-list li');
-  hoverEls.forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursor.classList.add('hovering');
-      follower.classList.add('hovering');
-    });
-    el.addEventListener('mouseleave', () => {
-      cursor.classList.remove('hovering');
-      follower.classList.remove('hovering');
-    });
-  });
+  /* ══════════════════════════════════════
+     02. SKILLS PIXEL MATRIX BUILDER & ANIMATION
+  ══════════════════════════════════════ */
+  const matrixContainer = document.getElementById('pixelMatrix');
+  if (matrixContainer) {
+    // Stepped equalizer levels corresponding to template pattern
+    const rowLevels = [
+      9, // Python & C++
+      9, // Machine Learning
+      8, // Computer Vision
+      7, // NLP & LLMs
+      8, // Agentic AI
+      9, // Data Analytics
+      9, // Scikit & Pandas
+      8  // DSA & OOP
+    ];
 
-  // Hide cursor when it leaves window
-  document.addEventListener('mouseleave', () => {
-    cursor.style.opacity = '0';
-    follower.style.opacity = '0';
-  });
-  document.addEventListener('mouseenter', () => {
-    cursor.style.opacity = '1';
-    follower.style.opacity = '0.6';
-  });
-})();
+    rowLevels.forEach((level, rIdx) => {
+      const row = document.createElement('div');
+      row.className = 'matrix-row';
 
-/* ══════════════════════════════════════
-   3. NAVBAR — Scroll opacity / blur
-══════════════════════════════════════ */
-(function initNavbar() {
-  const navbar = document.getElementById('navbar');
-  if (!navbar) return;
-
-  let lastScrollY = 0;
-  let ticking = false;
-
-  function onScroll() {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        const scrollY = window.scrollY;
-        if (scrollY > 60) {
-          navbar.classList.add('scrolled');
-        } else {
-          navbar.classList.remove('scrolled');
+      for (let c = 0; c < 10; c++) {
+        const cell = document.createElement('div');
+        cell.className = 'matrix-cell';
+        if (c < level) {
+          // Delay stagger for wave illumination
+          setTimeout(() => {
+            cell.classList.add('filled');
+          }, (rIdx * 70) + (c * 35));
         }
-        lastScrollY = scrollY;
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }
 
-  window.addEventListener('scroll', onScroll, { passive: true });
-})();
-
-/* ══════════════════════════════════════
-   4. MOBILE MENU TOGGLE
-══════════════════════════════════════ */
-(function initMobileMenu() {
-  const toggle = document.getElementById('navToggle');
-  const links  = document.getElementById('navLinks');
-  if (!toggle || !links) return;
-
-  let open = false;
-
-  toggle.addEventListener('click', () => {
-    open = !open;
-    links.classList.toggle('open', open);
-    document.body.style.overflow = open ? 'hidden' : '';
-
-    // Animate hamburger → X
-    const spans = toggle.querySelectorAll('span');
-    if (open) {
-      spans[0].style.transform = 'translateY(6.5px) rotate(45deg)';
-      spans[1].style.opacity   = '0';
-      spans[2].style.transform = 'translateY(-6.5px) rotate(-45deg)';
-    } else {
-      spans[0].style.transform = '';
-      spans[1].style.opacity   = '';
-      spans[2].style.transform = '';
-    }
-  });
-
-  // Close on link click
-  links.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      open = false;
-      links.classList.remove('open');
-      document.body.style.overflow = '';
-      toggle.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
-    });
-  });
-})();
-
-/* ══════════════════════════════════════
-   5. SCROLL REVEAL  (IntersectionObserver)
-══════════════════════════════════════ */
-(function initScrollReveal() {
-  const revealEls = document.querySelectorAll('.reveal-up');
-  if (!revealEls.length) return;
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target); // fire once
-      }
-    });
-  }, {
-    threshold: 0.12,
-    rootMargin: '0px 0px -50px 0px'
-  });
-
-  revealEls.forEach(el => observer.observe(el));
-})();
-
-/* ══════════════════════════════════════
-   6. SKILLS MATRIX ANIMATED FILL
-══════════════════════════════════════ */
-(function initSkillsMatrix() {
-  const matrix = document.querySelector('.skills-matrix');
-  if (!matrix) return;
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animated');
-
-        // Staggered per-block delay
-        const rows = entry.target.querySelectorAll('.matrix-row');
-        rows.forEach((row, rowIdx) => {
-          const blocks = row.querySelectorAll('.mb:not(.empty)');
-          blocks.forEach((block, blockIdx) => {
-            block.style.transitionDelay = `${(rowIdx * 0.08) + (blockIdx * 0.04)}s`;
-          });
+        // Interactive hover reaction
+        cell.addEventListener('mouseenter', () => {
+          cell.style.transform = 'scale(1.4)';
+          cell.style.backgroundColor = '#FFFFFF';
+        });
+        cell.addEventListener('mouseleave', () => {
+          cell.style.transform = '';
+          cell.style.backgroundColor = '';
         });
 
-        observer.unobserve(entry.target);
+        row.appendChild(cell);
       }
+      matrixContainer.appendChild(row);
     });
-  }, { threshold: 0.3 });
-
-  observer.observe(matrix);
-})();
-
-/* ══════════════════════════════════════
-   7. COUNTER ANIMATION
-══════════════════════════════════════ */
-(function initCounters() {
-  const counters = document.querySelectorAll('.stat-num[data-count]');
-  if (!counters.length) return;
-
-  function animateCounter(el) {
-    const target   = parseInt(el.getAttribute('data-count'), 10);
-    const duration = 1200;
-    const start    = performance.now();
-
-    function update(now) {
-      const elapsed = now - start;
-      const progress = Math.min(elapsed / duration, 1);
-      // ease out expo
-      const eased = 1 - Math.pow(2, -10 * progress);
-      el.textContent = Math.round(eased * target);
-      if (progress < 1) requestAnimationFrame(update);
-      else el.textContent = target;
-    }
-    requestAnimationFrame(update);
   }
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateCounter(entry.target);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.5 });
+  /* ══════════════════════════════════════
+     03. KINETIC TEXT SCRAMBLE ANIMATION
+  ══════════════════════════════════════ */
+  const scrambleElements = document.querySelectorAll('[data-scramble]');
+  const glyphs = 'ABCDEFGHIKLMNOPQRSTUVWXYZ0123456789!<>_+-~';
 
-  counters.forEach(el => observer.observe(el));
-})();
-
-/* ══════════════════════════════════════
-   8. GLITCH / TYPEWRITER on hero name
-══════════════════════════════════════ */
-(function initHeroTypewriter() {
-  const displayWords = document.querySelectorAll('.display-word');
-  if (!displayWords.length) return;
-
-  // Characters for scramble effect
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&';
-
-  function scrambleText(el, finalText, duration = 800) {
-    const totalFrames = Math.round(duration / 40);
-    let frame = 0;
+  function scrambleText(element) {
+    const originalText = element.getAttribute('data-scramble') || element.textContent.trim();
+    const distressSpan = element.querySelector('.distress-text') || element;
+    let iteration = 0;
+    const maxIterations = originalText.length * 2.5;
 
     const interval = setInterval(() => {
-      const progress = frame / totalFrames;
-      const revealedCount = Math.floor(progress * finalText.length);
+      distressSpan.textContent = originalText
+        .split('')
+        .map((char, index) => {
+          if (index < iteration / 2.5) {
+            return originalText[index];
+          }
+          return glyphs[Math.floor(Math.random() * glyphs.length)];
+        })
+        .join('');
 
-      let display = '';
-      for (let i = 0; i < finalText.length; i++) {
-        if (i < revealedCount) {
-          display += finalText[i];
-        } else {
-          display += chars[Math.floor(Math.random() * chars.length)];
-        }
-      }
-
-      // Keep existing ::before via data-glitch, update visible text
-      el.childNodes.forEach(node => {
-        if (node.nodeType === Node.TEXT_NODE) node.textContent = display;
-      });
-
-      frame++;
-      if (frame >= totalFrames) {
+      if (iteration >= maxIterations) {
+        distressSpan.textContent = originalText;
         clearInterval(interval);
-        // Restore clean text node
-        el.childNodes.forEach(node => {
-          if (node.nodeType === Node.TEXT_NODE) node.textContent = finalText;
-        });
       }
-    }, 40);
+      iteration++;
+    }, 30);
   }
 
-  // Run scramble after loader hides
-  setTimeout(() => {
-    displayWords.forEach((word, i) => {
-      const finalText = word.getAttribute('data-glitch') || word.textContent.trim();
-      setTimeout(() => scrambleText(word, finalText, 1000), i * 200);
-    });
-  }, 2000);
-})();
-
-/* ══════════════════════════════════════
-   9. SMOOTH SCROLL for anchor links
-══════════════════════════════════════ */
-(function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      const target = document.querySelector(this.getAttribute('href'));
-      if (!target) return;
-      e.preventDefault();
-      const navH = document.getElementById('navbar')?.offsetHeight || 70;
-      const top  = target.getBoundingClientRect().top + window.scrollY - navH;
-      window.scrollTo({ top, behavior: 'smooth' });
-    });
+  // Initial scramble on load
+  scrambleElements.forEach((el, i) => {
+    setTimeout(() => scrambleText(el), 300 + (i * 250));
+    el.addEventListener('mouseenter', () => scrambleText(el));
   });
-})();
 
-/* ══════════════════════════════════════
-   10. BARCODE DECORATIVE — dynamic generation
-══════════════════════════════════════ */
-(function initBarcodes() {
-  const barcodes = document.querySelectorAll('.barcode-deco');
-  barcodes.forEach(bc => {
-    // Inject a few random thin bars as child divs for extra detail
-    for (let i = 0; i < 20; i++) {
-      const bar = document.createElement('div');
-      const h = Math.random() * 60 + 40;
-      const w = Math.random() < 0.3 ? 3 : 1;
-      bar.style.cssText = `
-        display: inline-block;
-        width: ${w}px;
-        height: ${h}%;
-        background: rgba(255,255,255,${0.1 + Math.random() * 0.25});
-        align-self: flex-end;
-        flex-shrink: 0;
-      `;
-      bc.appendChild(bar);
+  /* ══════════════════════════════════════
+     04. PORTRAIT PARALLAX 3D TILT
+  ══════════════════════════════════════ */
+  const portraitStage = document.getElementById('portraitStage');
+  if (portraitStage && window.matchMedia('(hover: hover)').matches) {
+    portraitStage.addEventListener('mousemove', (e) => {
+      const rect = portraitStage.getBoundingClientRect();
+      const x = e.clientX - rect.left - (rect.width / 2);
+      const y = e.clientY - rect.top - (rect.height / 2);
+      
+      const tiltX = (y / (rect.height / 2)) * -6;
+      const tiltY = (x / (rect.width / 2)) * 6;
+
+      portraitStage.style.transform = `perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+    });
+
+    portraitStage.addEventListener('mouseleave', () => {
+      portraitStage.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg)';
+      portraitStage.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+    });
+
+    portraitStage.addEventListener('mouseenter', () => {
+      portraitStage.style.transition = 'none';
+    });
+  }
+
+  /* ══════════════════════════════════════
+     05. MAGNETIC "WORK TOGETHER" BUTTON
+  ══════════════════════════════════════ */
+  const workBtn = document.getElementById('workTogetherBtn');
+  if (workBtn && window.matchMedia('(hover: hover)').matches) {
+    workBtn.addEventListener('mousemove', (e) => {
+      const rect = workBtn.getBoundingClientRect();
+      const x = e.clientX - (rect.left + rect.width / 2);
+      const y = e.clientY - (rect.top + rect.height / 2);
+
+      workBtn.style.transform = `translate(${x * 0.22}px, ${y * 0.22}px)`;
+    });
+
+    workBtn.addEventListener('mouseleave', () => {
+      workBtn.style.transform = 'translate(0px, 0px)';
+      workBtn.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+      setTimeout(() => { workBtn.style.transition = ''; }, 400);
+    });
+  }
+
+  /* ══════════════════════════════════════
+     06. INTERACTIVE PROJECT DETAILS MODAL
+  ══════════════════════════════════════ */
+  const projectModal = document.getElementById('projectModal');
+  const modalBackdrop = document.getElementById('modalBackdrop');
+  const modalClose = document.getElementById('modalClose');
+  const modalId = document.getElementById('modalId');
+  const modalBody = document.getElementById('modalBody');
+
+  const projectData = {
+    agrisakhi: {
+      id: 'PROJECT // 01',
+      title: 'AGRISAKHI',
+      tagline: 'AI-Based Agricultural Assistance Application',
+      desc: 'Developed an AI-driven agricultural decision-support application to empower regional farmers with real-time crop disease classification, soil moisture evaluation, and actionable prescriptive insights.',
+      bullets: [
+        'Developed end-to-end computer vision and classification models to detect crop pathologies with 96.8% accuracy.',
+        'Applied predictive machine learning models to generate tailored fertilizer and irrigation recommendations.',
+        'Engineered an intuitive, high-contrast multilingual interface designed specifically for field conditions.',
+        'Implemented data pipelines preprocessing multimodal soil, weather, and sensor telemetry metrics.'
+      ],
+      tech: ['Python', 'Machine Learning', 'Scikit-learn', 'Computer Vision', 'Data Analytics', 'Pandas'],
+      repo: 'https://github.com/MohammedSahim'
+    },
+    audexify: {
+      id: 'PROJECT // 02',
+      title: 'AUDEXIFY',
+      tagline: 'AI-Powered Web Accessibility Auditor',
+      desc: 'Engineered an intelligent automated web accessibility platform that audits websites against WCAG 2.1 AA/AAA guidelines, detects structural flaws, and provides AI-generated plain-language remediation instructions.',
+      bullets: [
+        'Implemented webpage DOM parser and automated contrast ratio verification (identifying color legibility flaws).',
+        'Built automated AI pipeline for analyzing visual hierarchies and diagnosing screen reader accessibility gaps.',
+        'Generates actionable remediation summaries with live HTML/CSS fix recommendations for developers.',
+        'Designed URL submission dashboard with live compliance breakdown and scoring metrics.'
+      ],
+      tech: ['Python', 'Artificial Intelligence', 'Web Tech', 'NLP', 'Computer Vision', 'WCAG 2.1'],
+      repo: 'https://github.com/MohammedSahim'
+    },
+    pinnacle: {
+      id: 'PROJECT // 03',
+      title: 'PINNACLE 2026',
+      tagline: 'Event Coordinator · International Technical Symposium & AI Summit',
+      desc: 'Led organizational activities and technical competitions at Pinnacle 2026, coordinating hackathons, AI workshops, and project showcases for hundreds of engineering participants.',
+      bullets: [
+        'Coordinated event logistics and multi-track competitive hackathons for 50+ development teams.',
+        'Spearheaded AI Summit technical sessions covering Machine Learning, Computer Vision, and Agentic AI.',
+        'Presented practical AI application benchmarks and mentored student teams on model development.',
+        'Organized collaborative technical challenges emphasizing teamwork and fast-paced engineering.'
+      ],
+      tech: ['Leadership', 'Event Coordination', 'Technical Workshops', 'Hackathon Mentorship'],
+      repo: 'https://github.com/MohammedSahim'
     }
-    // Clear pseudo-element content by overriding via inline style
-    bc.style.setProperty('--clear', 'none');
-  });
-})();
+  };
 
-/* ══════════════════════════════════════
-   11. SECTION ACTIVE HIGHLIGHT in Navbar
-══════════════════════════════════════ */
-(function initActiveNav() {
-  const sections = document.querySelectorAll('section[id]');
-  const navItems = document.querySelectorAll('.nav-links a');
-  if (!sections.length || !navItems.length) return;
+  function openProjectModal(key) {
+    const data = projectData[key];
+    if (!data) return;
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
-        navItems.forEach(a => {
-          a.style.color = '';
-          if (a.getAttribute('href') === '#' + id) {
-            a.style.color = '#A8FF00';
-          }
-        });
-      }
+    modalId.textContent = data.id;
+    modalBody.innerHTML = `
+      <h3 class="modal-title">${data.title}</h3>
+      <p class="modal-tagline">${data.tagline}</p>
+      <p class="modal-desc">${data.desc}</p>
+      <ul class="modal-bullets">
+        ${data.bullets.map(b => `<li>${b}</li>`).join('')}
+      </ul>
+      <div class="modal-tech-stack">
+        ${data.tech.map(t => `<span class="modal-pill">${t}</span>`).join('')}
+      </div>
+      <div class="modal-actions">
+        <a href="${data.repo}" target="_blank" rel="noopener" class="modal-action-btn">
+          <span>VIEW ON GITHUB</span>
+          <span>↗</span>
+        </a>
+      </div>
+    `;
+
+    projectModal.classList.add('open');
+    projectModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeProjectModal() {
+    projectModal.classList.remove('open');
+    projectModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.project-entry').forEach(entry => {
+    entry.addEventListener('click', () => {
+      const pKey = entry.getAttribute('data-project');
+      openProjectModal(pKey);
     });
-  }, { threshold: 0.4 });
-
-  sections.forEach(s => observer.observe(s));
-})();
-
-/* ══════════════════════════════════════
-   12. PARALLAX tilt on portrait circle
-══════════════════════════════════════ */
-(function initParallax() {
-  const portrait = document.querySelector('.portrait-circle');
-  if (!portrait) return;
-
-  document.addEventListener('mousemove', (e) => {
-    const { clientX, clientY } = e;
-    const { innerWidth, innerHeight } = window;
-    const rx = ((clientY / innerHeight) - 0.5) * 10;
-    const ry = ((clientX / innerWidth) - 0.5) * -10;
-    portrait.style.transform = `perspective(600px) rotateX(${rx}deg) rotateY(${ry}deg)`;
   });
 
-  document.addEventListener('mouseleave', () => {
-    portrait.style.transform = '';
-  });
-})();
-
-/* ══════════════════════════════════════
-   13. CTA BUTTON magnetic effect
-══════════════════════════════════════ */
-(function initMagneticButton() {
-  const btn = document.querySelector('.cta-button');
-  if (!btn) return;
-
-  btn.addEventListener('mousemove', (e) => {
-    const rect = btn.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top  + rect.height / 2;
-    const dx = (e.clientX - cx) * 0.3;
-    const dy = (e.clientY - cy) * 0.3;
-    btn.style.transform = `translate(${dx}px, ${dy}px)`;
+  if (modalClose) modalClose.addEventListener('click', closeProjectModal);
+  if (modalBackdrop) modalBackdrop.addEventListener('click', closeProjectModal);
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && projectModal.classList.contains('open')) {
+      closeProjectModal();
+    }
   });
 
-  btn.addEventListener('mouseleave', () => {
-    btn.style.transform = '';
-    btn.style.transition = 'transform 0.4s cubic-bezier(0.16,1,0.3,1)';
-    setTimeout(() => { btn.style.transition = ''; }, 400);
-  });
-})();
+  /* ══════════════════════════════════════
+     07. CLICK-TO-COPY TOAST NOTIFICATION
+  ══════════════════════════════════════ */
+  const toast = document.getElementById('acidToast');
+  function showToast(msg) {
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3200);
+  }
 
-/* ══════════════════════════════════════
-   14. SCROLL PROGRESS indicator (optional thin bar at top)
-══════════════════════════════════════ */
-(function initScrollProgress() {
-  const bar = document.createElement('div');
-  bar.style.cssText = `
-    position: fixed;
-    top: 0; left: 0;
-    height: 2px;
-    width: 0%;
-    background: #A8FF00;
-    z-index: 9999;
-    transition: width 0.1s linear;
-    pointer-events: none;
-  `;
-  document.body.appendChild(bar);
+  const copyEmail = document.querySelector('.link-email');
+  if (copyEmail) {
+    copyEmail.addEventListener('click', (e) => {
+      // Copy to clipboard
+      navigator.clipboard.writeText('mohammedsahim18@gmail.com').then(() => {
+        showToast('COPIED TO CLIPBOARD: mohammedsahim18@gmail.com');
+      }).catch(() => {});
+    });
+  }
 
-  window.addEventListener('scroll', () => {
-    const scrollTop  = window.scrollY;
-    const docHeight  = document.documentElement.scrollHeight - window.innerHeight;
-    const pct        = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-    bar.style.width  = pct + '%';
-  }, { passive: true });
-})();
+  const copyPhone = document.querySelector('.link-phone');
+  if (copyPhone) {
+    copyPhone.addEventListener('click', (e) => {
+      navigator.clipboard.writeText('+91 9880167028').then(() => {
+        showToast('COPIED TO CLIPBOARD: +91 9880167028');
+      }).catch(() => {});
+    });
+  }
 
-/* ══════════════════════════════════════
-   INIT LOG
-══════════════════════════════════════ */
-console.log('%cMOHAMMED SAHIM — PORTFOLIO', 'color:#A8FF00;font-family:monospace;font-size:16px;font-weight:bold;');
-console.log('%cAI/ML DEVELOPER | KARNATAKA, INDIA', 'color:#888;font-family:monospace;font-size:11px;');
-console.log('%cmohammedsahim18@gmail.com', 'color:#A8FF00;font-family:monospace;font-size:11px;');
+  console.log('%c ACID BRUTAL PORTFOLIO LOADED ', 'background: #BAFF00; color: #000; font-weight: bold; padding: 4px 8px;');
+});
