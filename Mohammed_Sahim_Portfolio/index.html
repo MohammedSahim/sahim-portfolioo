@@ -3,532 +3,515 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mohammed Sahim — AI/ML Developer</title>
-  <meta name="description" content="Mohammed Sahim — AI/ML Developer & Engineering Student. Building bold AI solutions that cut through complexity." />
+  <title>Mohammed Sahim — Acid Brutal Portfolio</title>
+  <meta name="description" content="Mohammed Sahim — AI/ML Developer & Engineering Student. Acid Brutal Editorial Portfolio." />
 
-  <!-- Google Fonts -->
+  <!-- Fonts: Bebas Neue, Space Grotesk, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-  <!-- SVG Noise Filter -->
-  <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute;">
-    <filter id="noise">
-      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
-      <feColorMatrix type="saturate" values="0"/>
-      <feBlend in="SourceGraphic" mode="multiply"/>
-    </filter>
-  </svg>
+  <!-- Grain & Texture Canvas / Overlay -->
+  <div class="grain-overlay" aria-hidden="true"></div>
 
-  <!-- Custom Cursor -->
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-follower" id="cursorFollower"></div>
+  <!-- Custom Acid Cursor -->
+  <div class="acid-cursor" id="acidCursor" aria-hidden="true"></div>
+  <div class="acid-cursor-dot" id="acidCursorDot" aria-hidden="true"></div>
 
-  <!-- Loading Screen -->
-  <div class="loader" id="loader">
-    <div class="loader-inner">
-      <div class="loader-bar"></div>
-      <span class="loader-text">LOADING<span class="loader-dots">...</span></span>
+  <!-- Main Poster Frame -->
+  <div class="poster-wrapper">
+    <main class="poster-container" id="poster">
+
+      <!-- ══════════════════════════════════════════════════════════
+           01. TOP HEADER STRIP
+      ══════════════════════════════════════════════════════════ -->
+      <header class="header-strip">
+        <div class="header-col header-left">
+          <span class="mono-tag">AI/ML DEVELOPER</span>
+          <span class="mono-tag">VISUAL STRATEGIST</span>
+        </div>
+
+        <div class="header-col header-globe">
+          <svg class="wire-globe-icon" viewBox="0 0 100 100" fill="none" stroke="currentColor">
+            <circle cx="50" cy="50" r="45" stroke-width="2.5"/>
+            <ellipse cx="50" cy="50" rx="45" ry="18" stroke-width="2"/>
+            <ellipse cx="50" cy="50" rx="20" ry="45" stroke-width="2"/>
+            <line x1="5" y1="50" x2="95" y2="50" stroke-width="2"/>
+            <line x1="50" y1="5" x2="50" y2="95" stroke-width="2"/>
+          </svg>
+        </div>
+
+        <div class="header-col header-center">
+          <span class="mono-tag">BASED IN</span>
+          <span class="mono-tag">KARNATAKA, INDIA</span>
+        </div>
+
+        <div class="header-col header-star">
+          <span class="cross-star">✦</span>
+        </div>
+
+        <div class="header-col header-right">
+          <span class="mono-tag year-tag">2026©</span>
+          <div class="film-calib-strip" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+      </header>
+
+      <!-- ══════════════════════════════════════════════════════════
+           02. HERO ROW: MASSIVE TYPOGRAPHY (LEFT) & PORTRAIT + INTRO (RIGHT)
+      ══════════════════════════════════════════════════════════ -->
+      <section class="hero-block">
+        <!-- LEFT: Giant Stacked Distressed Typography -->
+        <div class="hero-left">
+          <div class="giant-name-group">
+            <h1 class="giant-word word-white" data-scramble="MOHAMMED">
+              <span class="distress-text">MOHAMMED</span>
+            </h1>
+            <h2 class="giant-word word-green" data-scramble="SAHIM">
+              <span class="distress-text">SAHIM</span>
+            </h2>
+          </div>
+
+          <div class="hero-bottom-tag">
+            <a href="#projects" class="portfolio-badge">
+              <span>PORTFOLIO</span>
+              <span class="badge-arrow">↗</span>
+            </a>
+            <div class="barcode-graphic" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Portrait with Neon Disc + Introduction Paper Card -->
+        <div class="hero-right">
+          <!-- Portrait Block -->
+          <div class="portrait-stage" id="portraitStage">
+            <!-- Neon Acid Circle Disc behind photo -->
+            <div class="neon-disc" aria-hidden="true"></div>
+
+            <!-- Subject Portrait -->
+            <div class="portrait-frame">
+              <img src="assets/profile.jpg" alt="Mohammed Sahim" class="portrait-photo" />
+              <div class="portrait-scanlines" aria-hidden="true"></div>
+              <div class="portrait-glitch-cut" aria-hidden="true"></div>
+            </div>
+
+            <!-- Brutalist Badge on Photo -->
+            <div class="portrait-id-tag">
+              <span>ID: MS/2026/05</span>
+            </div>
+
+            <!-- Film Frame Crop Marks -->
+            <div class="crop-mark top-left"></div>
+            <div class="crop-mark top-right"></div>
+            <div class="crop-mark bottom-left"></div>
+            <div class="crop-mark bottom-right"></div>
+          </div>
+
+          <!-- Introduction Paper Card (Off-White Editorial Block) -->
+          <article class="intro-paper-card">
+            <div class="card-arrow-corner">↘</div>
+            <h3 class="intro-headline">INTRODUCTION</h3>
+            <p class="intro-paragraph">
+              I design and engineer bold intelligent systems with machine learning, computer vision, and agentic AI that cut through noise and deliver real impact.
+            </p>
+
+            <ul class="intro-tags-list">
+              <li>ARTIFICIAL INTELLIGENCE</li>
+              <li>MACHINE LEARNING</li>
+              <li>COMPUTER VISION & NLP</li>
+              <li>AGENTIC AI & DATA SYSTEMS</li>
+            </ul>
+
+            <div class="intro-card-footer">
+              <svg class="mini-globe" viewBox="0 0 100 100" fill="none" stroke="currentColor">
+                <circle cx="50" cy="50" r="45" stroke-width="3"/>
+                <ellipse cx="50" cy="50" rx="45" ry="20" stroke-width="2.5"/>
+                <ellipse cx="50" cy="50" rx="20" ry="45" stroke-width="2.5"/>
+              </svg>
+              <div class="reg-mark">+ <span class="sq-fill">■</span></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           03. MIDDLE ROW: SELECTED PROJECTS (LEFT) & PROCESS NOTES (RIGHT)
+      ══════════════════════════════════════════════════════════ -->
+      <section class="middle-block" id="projects">
+        <!-- LEFT: Selected Projects List -->
+        <div class="projects-column">
+          <div class="block-header">
+            <span class="block-title">SELECTED PROJECTS</span>
+          </div>
+
+          <div class="projects-list">
+            <!-- Project 01: AgriSakhi -->
+            <article class="project-entry" data-project="agrisakhi">
+              <div class="entry-num-col">
+                <span class="num-text">01</span>
+                <div class="vertical-stripes" aria-hidden="true"></div>
+              </div>
+
+              <div class="entry-screen-card">
+                <div class="screen-preview agri-preview">
+                  <div class="screen-top-bar">
+                    <span class="term-dot"></span>
+                    <span class="screen-title">AGRISAKHI // AI CROP DIAGNOSTICS</span>
+                    <span class="status-live">ONLINE</span>
+                  </div>
+                  <div class="screen-body">
+                    <div class="scan-reticle">
+                      <span class="reticle-label">LEAF LESION SCAN · 96.8%</span>
+                    </div>
+                    <div class="diag-meta">
+                      <span class="crop-tag">🌱 Tomato Blight Detected</span>
+                      <span class="action-tag">Action: Bio-fungicide</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="entry-meta-col">
+                <h4 class="entry-name">AGRISAKHI</h4>
+                <p class="entry-type">AI ASSISTANT<br/>MACHINE LEARNING<br/>2024</p>
+                <button class="entry-link-btn" aria-label="Open AgriSakhi details">↗</button>
+              </div>
+            </article>
+
+            <!-- Project 02: Audexify -->
+            <article class="project-entry" data-project="audexify">
+              <div class="entry-num-col">
+                <span class="num-text">02</span>
+                <div class="vertical-stripes" aria-hidden="true"></div>
+              </div>
+
+              <div class="entry-screen-card">
+                <div class="screen-preview audex-preview">
+                  <div class="screen-top-bar">
+                    <span class="term-dot"></span>
+                    <span class="screen-title">AUDEXIFY // WCAG 2.1 AUDITOR</span>
+                    <span class="status-score">SCORE 94/100</span>
+                  </div>
+                  <div class="screen-body">
+                    <div class="audit-row passed">
+                      <span>✓ Contrast Ratio 4.5:1</span>
+                      <span class="badge-pass">PASS</span>
+                    </div>
+                    <div class="audit-row passed">
+                      <span>✓ ARIA Landmarks</span>
+                      <span class="badge-pass">PASS</span>
+                    </div>
+                    <div class="audit-row warn">
+                      <span>! Image Alt Missing (2)</span>
+                      <span class="badge-warn">FIX</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="entry-meta-col">
+                <h4 class="entry-name">AUDEXIFY</h4>
+                <p class="entry-type">ACCESSIBILITY<br/>AI & VISION<br/>2024</p>
+                <button class="entry-link-btn" aria-label="Open Audexify details">↗</button>
+              </div>
+            </article>
+
+            <!-- Project 03: Pinnacle 2026 & AI Summit -->
+            <article class="project-entry" data-project="pinnacle">
+              <div class="entry-num-col">
+                <span class="num-text">03</span>
+                <div class="vertical-stripes" aria-hidden="true"></div>
+              </div>
+
+              <div class="entry-screen-card">
+                <div class="screen-preview pinnacle-preview">
+                  <div class="screen-top-bar">
+                    <span class="term-dot"></span>
+                    <span class="screen-title">PINNACLE // AI SUMMIT LEAD</span>
+                    <span class="status-live">SYMPOSIUM</span>
+                  </div>
+                  <div class="screen-body summit-body">
+                    <div class="summit-headline">INTERNATIONAL TECH EVENT</div>
+                    <div class="summit-stat-row">
+                      <div class="s-stat"><span>ROLE</span><strong>Coordinator</strong></div>
+                      <div class="s-stat"><span>TEAMS</span><strong>50+ Devs</strong></div>
+                      <div class="s-stat"><span>SCOPE</span><strong>AI & Hackathon</strong></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="entry-meta-col">
+                <h4 class="entry-name">PINNACLE</h4>
+                <p class="entry-type">COORDINATOR<br/>AI SUMMIT<br/>2026</p>
+                <button class="entry-link-btn" aria-label="Open Pinnacle details">↗</button>
+              </div>
+            </article>
+          </div>
+
+          <div class="archive-footer-row">
+            <a href="https://github.com/MohammedSahim" target="_blank" rel="noopener" class="archive-link">
+              <span>VIEW FULL PROJECT ARCHIVE</span>
+              <span class="plus-icon">+</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- RIGHT: Process Notes Column -->
+        <aside class="process-column">
+          <div class="block-header green-header">
+            <span class="block-title green-title">PROCESS NOTES</span>
+          </div>
+
+          <div class="process-steps-list">
+            <!-- Step 1: Research -->
+            <div class="process-step-item">
+              <div class="step-icon-col">
+                <svg class="step-svg" viewBox="0 0 40 40" fill="none" stroke="currentColor">
+                  <polygon points="20,4 36,12 20,20 4,12" stroke-width="1.5"/>
+                  <polyline points="4,18 20,26 36,18" stroke-width="1.5"/>
+                  <polyline points="4,24 20,32 36,24" stroke-width="1.5"/>
+                </svg>
+              </div>
+              <div class="step-text-col">
+                <h5 class="step-name">RESEARCH</h5>
+                <p class="step-desc">Understand the problem, dataset distributions, and real-world domain context.</p>
+              </div>
+            </div>
+
+            <!-- Step 2: Concept / Model -->
+            <div class="process-step-item">
+              <div class="step-icon-col">
+                <svg class="step-svg" viewBox="0 0 40 40" fill="none" stroke="currentColor">
+                  <line x1="20" y1="2" x2="20" y2="38" stroke-width="1.5"/>
+                  <line x1="2" y1="20" x2="38" y2="20" stroke-width="1.5"/>
+                  <line x1="7" y1="7" x2="33" y2="33" stroke-width="1.5"/>
+                  <line x1="7" y1="33" x2="33" y2="7" stroke-width="1.5"/>
+                  <circle cx="20" cy="20" r="4" fill="currentColor"/>
+                </svg>
+              </div>
+              <div class="step-text-col">
+                <h5 class="step-name">CONCEPT & MODEL</h5>
+                <p class="step-desc">Explore feature spaces, baseline models, algorithmic directions, and loss functions.</p>
+              </div>
+            </div>
+
+            <!-- Step 3: Design / Pipeline -->
+            <div class="process-step-item">
+              <div class="step-icon-col">
+                <svg class="step-svg" viewBox="0 0 40 40" fill="none" stroke="currentColor">
+                  <ellipse cx="20" cy="20" rx="17" ry="6" stroke-width="1.5" transform="rotate(-30 20 20)"/>
+                  <ellipse cx="20" cy="20" rx="17" ry="6" stroke-width="1.5" transform="rotate(30 20 20)"/>
+                  <circle cx="20" cy="20" r="3" fill="currentColor"/>
+                </svg>
+              </div>
+              <div class="step-text-col">
+                <h5 class="step-name">DESIGN & PIPELINE</h5>
+                <p class="step-desc">Build modular data pipelines, preprocessing, and interfaces with engineering edge.</p>
+              </div>
+            </div>
+
+            <!-- Step 4: Develop & Train -->
+            <div class="process-step-item">
+              <div class="step-icon-col">
+                <svg class="step-svg" viewBox="0 0 40 40" fill="none" stroke="currentColor">
+                  <circle cx="20" cy="20" r="16" stroke-width="1.5"/>
+                  <ellipse cx="20" cy="20" rx="16" ry="6" stroke-width="1.2"/>
+                  <ellipse cx="20" cy="20" rx="6" ry="16" stroke-width="1.2"/>
+                </svg>
+              </div>
+              <div class="step-text-col">
+                <h5 class="step-name">DEVELOP & TRAIN</h5>
+                <p class="step-desc">Prototype, iterate training loops, evaluate cross-validation, and optimize performance.</p>
+              </div>
+            </div>
+
+            <!-- Step 5: Deliver & Deploy -->
+            <div class="process-step-item">
+              <div class="step-icon-col">
+                <svg class="step-svg" viewBox="0 0 40 40" fill="none" stroke="currentColor">
+                  <circle cx="20" cy="20" r="7" stroke-width="1.5"/>
+                  <line x1="20" y1="3" x2="20" y2="8" stroke-width="1.5"/>
+                  <line x1="20" y1="32" x2="20" y2="37" stroke-width="1.5"/>
+                  <line x1="3" y1="20" x2="8" y2="20" stroke-width="1.5"/>
+                  <line x1="32" y1="20" x2="37" y2="20" stroke-width="1.5"/>
+                  <line x1="8" y1="8" x2="12" y2="12" stroke-width="1.5"/>
+                  <line x1="28" y1="28" x2="32" y2="32" stroke-width="1.5"/>
+                  <line x1="8" y1="32" x2="12" y2="28" stroke-width="1.5"/>
+                  <line x1="28" y1="12" x2="32" y2="8" stroke-width="1.5"/>
+                </svg>
+              </div>
+              <div class="step-text-col">
+                <h5 class="step-name">DELIVER & DEPLOY</h5>
+                <p class="step-desc">Polish every metric. Ensure robustness and deploy models with tangible, measurable impact.</p>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           04. LOWER ROW: SKILLS MATRIX + QUOTE CARD + TOOLS BOX
+      ══════════════════════════════════════════════════════════ -->
+      <section class="bottom-cards-block" id="skills">
+        <!-- Card 1: Skills Matrix -->
+        <div class="grid-card matrix-card">
+          <div class="card-header-simple">
+            <span class="card-title">SKILLS MATRIX</span>
+          </div>
+
+          <div class="matrix-content">
+            <div class="skills-labels-col">
+              <span>PYTHON & C++</span>
+              <span>MACHINE LEARNING</span>
+              <span>COMPUTER VISION</span>
+              <span>NLP & LLMS</span>
+              <span>AGENTIC AI</span>
+              <span>DATA ANALYTICS</span>
+              <span>SCIKIT & PANDAS</span>
+              <span>DSA & OOP</span>
+            </div>
+
+            <!-- Equalizer / Stepped Heatmap Pixel Matrix -->
+            <div class="pixel-matrix-grid" id="pixelMatrix">
+              <!-- Dynamically or statically populated rows of 10 blocks each -->
+            </div>
+          </div>
+
+          <div class="matrix-legend">
+            <span>BASIC</span>
+            <span>EXPERT</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Brutalist Quote Card -->
+        <div class="grid-card quote-card">
+          <div class="quote-text-wrap">
+            <span class="corner-cross top-left">✦</span>
+            <blockquote class="acid-quote">
+              “DESIGN IS<br/>
+              INTELLIGENCE<br/>
+              MADE VISIBLE.”
+            </blockquote>
+            <p class="quote-sub">// APPLIED TO AI & SYSTEMS</p>
+          </div>
+
+          <div class="quote-footer">
+            <svg class="mini-globe-green" viewBox="0 0 100 100" fill="none" stroke="currentColor">
+              <circle cx="50" cy="50" r="45" stroke-width="3"/>
+              <ellipse cx="50" cy="50" rx="45" ry="18" stroke-width="2.5"/>
+              <ellipse cx="50" cy="50" rx="18" ry="45" stroke-width="2.5"/>
+            </svg>
+            <span class="bottom-cross">✦</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Solid Acid-Green Tools Card -->
+        <div class="grid-card tools-card-green">
+          <div class="tools-corner-mark"></div>
+          <h4 class="tools-header-text">TOOLS</h4>
+
+          <ul class="tools-black-list">
+            <li>PYTHON</li>
+            <li>SCIKIT-LEARN</li>
+            <li>OPENCV</li>
+            <li>NUMPY & PANDAS</li>
+            <li>GIT & GITHUB</li>
+            <li>VS CODE</li>
+            <li>JUPYTER</li>
+            <li>LINUX</li>
+          </ul>
+
+          <div class="tools-bottom-mark">
+            <span class="tools-asterisk">✱</span>
+            <div class="tools-bar-deco"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           05. FOOTER CTA ROW: "LET'S CREATE SOMETHING REAL."
+      ══════════════════════════════════════════════════════════ -->
+      <section class="cta-banner-block" id="contact">
+        <!-- Huge CTA Headline -->
+        <div class="cta-headline-col">
+          <h2 class="giant-cta-text">
+            <span class="cta-line-white">
+              <span class="distress-text">LET'S CREATE</span>
+              <span class="cta-arrow-giant">↗</span>
+            </span>
+            <span class="cta-line-green">
+              <span class="distress-text">SOMETHING REAL.</span>
+            </span>
+          </h2>
+        </div>
+
+        <!-- Contact & Work Together Group -->
+        <div class="cta-contact-col">
+          <div class="contact-sub-group">
+            <span class="mono-sub-title">CONTACT</span>
+            <a href="mailto:mohammedsahim18@gmail.com" class="contact-link link-email" title="Click to copy email">
+              mohammedsahim18@gmail.com
+            </a>
+            <a href="tel:+919880167028" class="contact-link link-phone">
+              +91 9880167028
+            </a>
+          </div>
+
+          <div class="follow-sub-group">
+            <span class="mono-sub-title">FOLLOW</span>
+            <a href="https://linkedin.com/in/mohammed-sahim" target="_blank" rel="noopener" class="contact-link">
+              linkedin.com/in/mohammed-sahim
+            </a>
+            <a href="https://github.com/MohammedSahim" target="_blank" rel="noopener" class="contact-link">
+              github.com/MohammedSahim
+            </a>
+          </div>
+
+          <!-- Giant Green "WORK TOGETHER" Button -->
+          <a href="mailto:mohammedsahim18@gmail.com?subject=Project%20Inquiry%20-%20Mohammed%20Sahim" class="work-together-btn" id="workTogetherBtn">
+            <span class="wt-arrow">↗</span>
+            <span class="wt-text">WORK<br/>TOGETHER</span>
+            <div class="btn-scan-stripes" aria-hidden="true"></div>
+          </a>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+           06. BOTTOM STRIP
+      ══════════════════════════════════════════════════════════ -->
+      <footer class="bottom-colophon-strip">
+        <span class="colophon-left">MOHAMMED SAHIM STUDIO</span>
+        <span class="colophon-center">DESIGN. STRATEGY. IMPACT.</span>
+        <span class="colophon-right">THANKS FOR SCROLLING <span class="sq-green">■</span></span>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- Interactive Project Deep-Dive Modal -->
+  <div class="acid-modal" id="projectModal" aria-hidden="true" role="dialog">
+    <div class="acid-modal-backdrop" id="modalBackdrop"></div>
+    <div class="acid-modal-panel">
+      <div class="modal-top">
+        <span class="modal-project-id" id="modalId">PROJECT // 01</span>
+        <button class="modal-close" id="modalClose">✕ CLOSE</button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Injected via script.js -->
+      </div>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════ NAVBAR ═══════════════════════════════ -->
-  <nav class="navbar" id="navbar">
-    <div class="nav-inner">
-      <a href="#hero" class="nav-logo">MS<span class="logo-dot">.</span></a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#intro">ABOUT</a></li>
-        <li><a href="#projects">WORK</a></li>
-        <li><a href="#skills">SKILLS</a></li>
-        <li><a href="#contact">CONTACT</a></li>
-      </ul>
-      <a href="assets/Mohammed_Sahim_Resume.pdf" download class="nav-resume">RESUME ↗</a>
-      <button class="nav-toggle" id="navToggle" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
+  <!-- Toast Notification -->
+  <div class="acid-toast" id="acidToast" aria-live="polite"></div>
 
-  <!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
-  <section class="hero" id="hero">
-    <div class="grain-overlay"></div>
-
-    <!-- Top labels row -->
-    <div class="hero-labels">
-      <span class="label-tag">🌐 AI/ML DEVELOPER</span>
-      <span class="label-tag">◈ ENGINEERING STUDENT</span>
-      <span class="label-tag">📍 KARNATAKA, INDIA</span>
-      <span class="label-tag">2026©</span>
-    </div>
-
-    <!-- Hero layout -->
-    <div class="hero-body">
-      <!-- Left: big name top -->
-      <div class="hero-name-top">
-        <span class="display-word" data-glitch="MOHAMMED">MOHAMMED</span>
-      </div>
-
-      <!-- Center: portrait circle -->
-      <div class="hero-portrait-wrap">
-        <div class="portrait-circle">
-          <div class="portrait-grain"></div>
-          <img src="assets/profile.jpg" alt="Mohammed Sahim" class="portrait-img" />
-          <div class="portrait-ring"></div>
-        </div>
-        <div class="portfolio-label">PORTFOLIO ↗</div>
-      </div>
-
-      <!-- Right: big name bottom -->
-      <div class="hero-name-bottom">
-        <span class="display-word" data-glitch="SAHIM">SAHIM</span>
-      </div>
-    </div>
-
-    <!-- Hero sub-info bar -->
-    <div class="hero-subbar">
-      <div class="hero-role">
-        <span class="mono-label">ROLE</span>
-        <p>AI/ML Developer & Engineering Student</p>
-      </div>
-      <div class="hero-status">
-        <span class="status-dot"></span>
-        <span class="mono-label">AVAILABLE FOR OPPORTUNITIES</span>
-      </div>
-      <div class="hero-scroll-hint">
-        <span class="mono-label">SCROLL TO EXPLORE</span>
-        <span class="scroll-arrow">↓</span>
-      </div>
-    </div>
-
-    <!-- Barcode decorative -->
-    <div class="barcode-deco barcode-left"></div>
-    <div class="barcode-deco barcode-right"></div>
-  </section>
-
-  <!-- ═══════════════════════════════ INTRO ═══════════════════════════════ -->
-  <section class="intro-section" id="intro">
-    <div class="container">
-      <div class="intro-grid">
-
-        <!-- Introduction card -->
-        <div class="intro-card reveal-up">
-          <div class="card-header">
-            <span class="section-num">00</span>
-            <span class="mono-label">INTRODUCTION</span>
-          </div>
-          <p class="intro-text">
-            Motivated Artificial Intelligence and Machine Learning engineering student with hands-on experience developing intelligent applications, predictive systems, and computer vision pipelines. I build bold AI solutions that cut through complexity and deliver real impact.
-          </p>
-          <div class="intro-skills">
-            <span class="skill-pill">MACHINE LEARNING</span>
-            <span class="skill-pill">COMPUTER VISION</span>
-            <span class="skill-pill">NLP</span>
-            <span class="skill-pill">AGENTIC AI</span>
-            <span class="skill-pill">DATA ANALYTICS</span>
-            <span class="skill-pill">PYTHON</span>
-          </div>
-        </div>
-
-        <!-- Stats column -->
-        <div class="intro-stats reveal-up" style="--delay:0.15s">
-          <div class="stat-item">
-            <span class="stat-num" data-count="2">0</span>
-            <span class="stat-label">PROJECTS SHIPPED</span>
-          </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item">
-            <span class="stat-num" data-count="4">0</span>
-            <span class="stat-label">CERTIFICATIONS</span>
-          </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item">
-            <span class="stat-num" data-count="3">0</span>
-            <span class="stat-label">YEARS LEARNING</span>
-          </div>
-        </div>
-
-        <!-- Edu card -->
-        <div class="edu-card reveal-up" style="--delay:0.3s">
-          <div class="card-header">
-            <span class="mono-label">EDUCATION</span>
-          </div>
-          <div class="edu-item">
-            <span class="edu-year mono-label">2023—2027</span>
-            <div>
-              <p class="edu-degree">B.E. in AI & Machine Learning</p>
-              <p class="edu-school">Yenepoya Institute of Technology</p>
-            </div>
-          </div>
-          <div class="edu-item">
-            <span class="edu-year mono-label">2021—2023</span>
-            <div>
-              <p class="edu-degree">Pre-University — 88%</p>
-              <p class="edu-school">Iqra PU College, Udupi</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════ PROJECTS ═══════════════════════════════ -->
-  <section class="projects-section" id="projects">
-    <div class="container">
-
-      <div class="section-header reveal-up">
-        <span class="section-label mono-label">SELECTED WORK</span>
-        <h2 class="section-title">PROJECTS</h2>
-      </div>
-
-      <div class="projects-list">
-
-        <!-- Project 01 -->
-        <div class="project-item reveal-up">
-          <div class="project-num">01</div>
-          <div class="project-mockup">
-            <div class="mockup-window">
-              <div class="mockup-bar">
-                <span></span><span></span><span></span>
-              </div>
-              <div class="mockup-agrisakhi">
-                <div class="mock-header">🌱 AgriSakhi</div>
-                <div class="mock-chart">
-                  <div class="chart-bar" style="height:60%"></div>
-                  <div class="chart-bar" style="height:85%"></div>
-                  <div class="chart-bar" style="height:45%"></div>
-                  <div class="chart-bar" style="height:70%"></div>
-                  <div class="chart-bar" style="height:90%"></div>
-                </div>
-                <div class="mock-label">CROP HEALTH ANALYSIS</div>
-              </div>
-            </div>
-          </div>
-          <div class="project-info">
-            <div class="project-meta">
-              <span class="project-type mono-label">ML / AGRITECH</span>
-              <span class="project-year mono-label">2024</span>
-            </div>
-            <h3 class="project-name">AGRISAKHI</h3>
-            <p class="project-desc">
-              AI-driven agricultural application assisting smallholder farmers with crop management, disease prevention, and agronomic decision-making using ML classification models. Empowering rural communities with accessible AI.
-            </p>
-            <div class="project-tags">
-              <span class="tag">Python</span>
-              <span class="tag">Scikit-learn</span>
-              <span class="tag">OpenCV</span>
-              <span class="tag">ML Models</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Divider -->
-        <div class="project-divider"></div>
-
-        <!-- Project 02 -->
-        <div class="project-item reveal-up">
-          <div class="project-num">02</div>
-          <div class="project-mockup">
-            <div class="mockup-window">
-              <div class="mockup-bar">
-                <span></span><span></span><span></span>
-              </div>
-              <div class="mockup-audexify">
-                <div class="mock-header">♿ Audexify</div>
-                <div class="mock-audit">
-                  <div class="audit-row"><span class="audit-icon pass">✓</span> Color Contrast</div>
-                  <div class="audit-row"><span class="audit-icon pass">✓</span> ARIA Labels</div>
-                  <div class="audit-row"><span class="audit-icon warn">!</span> Alt Text</div>
-                  <div class="audit-row"><span class="audit-icon pass">✓</span> WCAG 2.1 AA</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="project-info">
-            <div class="project-meta">
-              <span class="project-type mono-label">AI SYSTEMS</span>
-              <span class="project-year mono-label">2024</span>
-            </div>
-            <h3 class="project-name">AUDEXIFY</h3>
-            <p class="project-desc">
-              AI-powered web accessibility auditing platform analyzing websites for WCAG compliance, visual contrast issues, and structural barriers. Making the web inclusive through intelligent automation.
-            </p>
-            <div class="project-tags">
-              <span class="tag">Python</span>
-              <span class="tag">NLP</span>
-              <span class="tag">Computer Vision</span>
-              <span class="tag">WCAG</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Process Notes sidebar -->
-    <div class="process-sidebar">
-      <div class="process-inner">
-        <span class="mono-label process-title">PROCESS NOTES</span>
-        <div class="process-steps">
-          <div class="process-step">
-            <div class="process-icon">🔍</div>
-            <div>
-              <span class="process-step-name">RESEARCH</span>
-              <p>Understand the problem, data, and context deeply</p>
-            </div>
-          </div>
-          <div class="process-step">
-            <div class="process-icon">🧠</div>
-            <div>
-              <span class="process-step-name">MODEL</span>
-              <p>Design the ML architecture and feature space</p>
-            </div>
-          </div>
-          <div class="process-step">
-            <div class="process-icon">⚙️</div>
-            <div>
-              <span class="process-step-name">BUILD</span>
-              <p>Develop intelligent systems with purpose and precision</p>
-            </div>
-          </div>
-          <div class="process-step">
-            <div class="process-icon">🔄</div>
-            <div>
-              <span class="process-step-name">TRAIN</span>
-              <p>Iterate, evaluate, and optimize model performance</p>
-            </div>
-          </div>
-          <div class="process-step">
-            <div class="process-icon">🚀</div>
-            <div>
-              <span class="process-step-name">DEPLOY</span>
-              <p>Launch with impact and monitor in production</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════ SKILLS ═══════════════════════════════ -->
-  <section class="skills-section" id="skills">
-    <div class="container">
-
-      <div class="section-header reveal-up">
-        <span class="section-label mono-label">EXPERTISE</span>
-        <h2 class="section-title">SKILLS MATRIX</h2>
-      </div>
-
-      <div class="skills-grid">
-
-        <!-- Skills matrix left -->
-        <div class="skills-matrix reveal-up">
-          <div class="matrix-row">
-            <span class="matrix-label">PYTHON</span>
-            <div class="matrix-blocks" data-fill="9">
-              <div class="mb"></div><div class="mb"></div><div class="mb"></div>
-              <div class="mb"></div><div class="mb"></div><div class="mb"></div>
-              <div class="mb"></div><div class="mb"></div><div class="mb"></div><div class="mb empty"></div>
-            </div>
-          </div>
-          <div class="matrix-row">
-            <span class="matrix-label">ML / AI</span>
-            <div class="matrix-blocks" data-fill="8">
-              <div class="mb"></div><div class="mb"></div><div class="mb"></div>
-              <div class="mb"></div><div class="mb"></div><div class="mb"></div>
-              <div class="mb"></div><div class="mb"></div><div class="mb empty"></div><div class="mb empty"></div>
-            </div>
-          </div>
-          <div class="matrix-row">
-            <span class="matrix-label">COMP. VISION</span>
-            <div class="matrix-blocks" data-fill="7">
-              <div class="mb"></div><div class="mb"></div><div class="mb"></div>
-              <div class="mb"></div><div class="mb"></div><div class="mb"></div>
-              <div class="mb"></div><div class="mb empty"></div><div class="mb empty"></div><div class="mb empty"></div>
-            </div>
-          </div>
-          <div class="matrix-row">
-            <span class="matrix-label">NLP</span>
-            <div class="matrix-blocks" data-fill="7">
-              <div class="mb"></div><div class="mb"></div><div class="mb"></div>
-              <div class="mb"></div><div class="mb"></div><div class="mb"></div>
-              <div class="mb"></div><div class="mb empty"></div><div class="mb empty"></div><div class="mb empty"></div>
-            </div>
-          </div>
-          <div class="matrix-row">
-            <span class="matrix-label">DATA ANALYSIS</span>
-            <div class="matrix-blocks" data-fill="8">
-              <div class="mb"></div><div class="mb"></div><div class="mb"></div>
-              <div class="mb"></div><div class="mb"></div><div class="mb"></div>
-              <div class="mb"></div><div class="mb"></div><div class="mb empty"></div><div class="mb empty"></div>
-            </div>
-          </div>
-          <div class="matrix-row">
-            <span class="matrix-label">GIT / DEVOPS</span>
-            <div class="matrix-blocks" data-fill="7">
-              <div class="mb"></div><div class="mb"></div><div class="mb"></div>
-              <div class="mb"></div><div class="mb"></div><div class="mb"></div>
-              <div class="mb"></div><div class="mb empty"></div><div class="mb empty"></div><div class="mb empty"></div>
-            </div>
-          </div>
-          <div class="matrix-row">
-            <span class="matrix-label">C / C++</span>
-            <div class="matrix-blocks" data-fill="6">
-              <div class="mb"></div><div class="mb"></div><div class="mb"></div>
-              <div class="mb"></div><div class="mb"></div><div class="mb"></div>
-              <div class="mb empty"></div><div class="mb empty"></div><div class="mb empty"></div><div class="mb empty"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Center quote -->
-        <div class="skills-quote reveal-up" style="--delay:0.2s">
-          <div class="quote-mark">"</div>
-          <blockquote>AI IS INTELLIGENCE MADE ACCESSIBLE.</blockquote>
-          <cite>— Mohammed Sahim</cite>
-          <div class="quote-deco"></div>
-        </div>
-
-        <!-- Tools box right -->
-        <div class="tools-box reveal-up" style="--delay:0.4s">
-          <div class="tools-header">
-            <span class="mono-label">TOOLS & STACK</span>
-          </div>
-          <ul class="tools-list">
-            <li>Python</li>
-            <li>Scikit-learn</li>
-            <li>NumPy / Pandas</li>
-            <li>OpenCV</li>
-            <li>Matplotlib / Seaborn</li>
-            <li>Git & GitHub</li>
-            <li>VS Code</li>
-            <li>Jupyter Notebook</li>
-            <li>Linux</li>
-          </ul>
-        </div>
-
-      </div>
-
-      <!-- Certifications row -->
-      <div class="certs-row reveal-up">
-        <span class="mono-label certs-title">CERTIFICATIONS</span>
-        <div class="certs-list">
-          <div class="cert-item">
-            <span class="cert-org">NPTEL</span>
-            <span class="cert-name">Python for Data Science</span>
-          </div>
-          <div class="cert-item">
-            <span class="cert-org">COURSERA</span>
-            <span class="cert-name">Machine Learning</span>
-          </div>
-          <div class="cert-item">
-            <span class="cert-org">CURSA</span>
-            <span class="cert-name">Data Analysis for Social Scientists</span>
-            <span class="cert-date mono-label">NOV 2026</span>
-          </div>
-          <div class="cert-item">
-            <span class="cert-org">SIMPLILEARN</span>
-            <span class="cert-name">Introduction to Cyber Security</span>
-            <span class="cert-date mono-label">OCT 2026</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Achievements row -->
-      <div class="achievements-row reveal-up">
-        <span class="mono-label certs-title">LEADERSHIP & ACHIEVEMENTS</span>
-        <div class="achievements-list">
-          <div class="achievement-item">
-            <span class="ach-icon">◈</span>
-            <span>Event Coordinator, Pinnacle 2026 (Technical Symposium)</span>
-          </div>
-          <div class="achievement-item">
-            <span class="ach-icon">◈</span>
-            <span>Member, AI Summit Committee</span>
-          </div>
-          <div class="achievement-item">
-            <span class="ach-icon">◈</span>
-            <span>Smart India Hackathon (SIH) Participant</span>
-          </div>
-          <div class="achievement-item">
-            <span class="ach-icon">◈</span>
-            <span>State-level Technical Competition Participant</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════ CTA ═══════════════════════════════ -->
-  <section class="cta-section" id="contact">
-    <div class="grain-overlay"></div>
-    <div class="container">
-      <div class="cta-inner">
-
-        <div class="cta-label mono-label reveal-up">READY TO COLLABORATE?</div>
-
-        <h2 class="cta-headline reveal-up">
-          LET'S BUILD<br/>SOMETHING<br/><span class="cta-accent">REAL.</span> ↗
-        </h2>
-
-        <div class="cta-body reveal-up">
-          <div class="contact-info">
-            <a href="mailto:mohammedsahim18@gmail.com" class="contact-link">
-              <span class="mono-label">EMAIL</span>
-              mohammedsahim18@gmail.com
-            </a>
-            <a href="tel:+919880167028" class="contact-link">
-              <span class="mono-label">PHONE</span>
-              +91 9880167028
-            </a>
-            <div class="contact-link">
-              <span class="mono-label">LOCATION</span>
-              Karnataka, India
-            </div>
-          </div>
-
-          <div class="follow-section">
-            <span class="mono-label">FOLLOW</span>
-            <div class="social-links">
-              <a href="https://linkedin.com/in/mohammed-sahim" target="_blank" rel="noopener" class="social-link">
-                LINKEDIN ↗
-              </a>
-              <a href="https://github.com/MohammedSahim" target="_blank" rel="noopener" class="social-link">
-                GITHUB ↗
-              </a>
-            </div>
-          </div>
-
-          <div class="cta-button-wrap">
-            <a href="mailto:mohammedsahim18@gmail.com" class="cta-button">
-              WORK TOGETHER
-              <span class="btn-arrow">↗</span>
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    <div class="barcode-deco barcode-left"></div>
-  </section>
-
-  <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <div class="footer-brand">MOHAMMED SAHIM.</div>
-      <div class="footer-tagline">AI. ML. IMPACT. THANKS FOR SCROLLING ↓</div>
-      <div class="footer-copy">
-        <span class="mono-label">© 2026 — ALL RIGHTS RESERVED</span>
-        <span class="mono-label footer-email">mohammedsahim18@gmail.com</span>
-      </div>
-    </div>
-  </footer>
-
+  <!-- JavaScript -->
   <script src="script.js"></script>
 </body>
 </html>
