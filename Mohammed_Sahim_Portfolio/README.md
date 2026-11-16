@@ -1,16 +1,19 @@
 # Mohammed Sahim — AI/ML Developer Portfolio
 
-A responsive, high-performance portfolio website for **Mohammed Sahim**, Artificial Intelligence & Machine Learning student and developer based in Karnataka, India.
+A bold, **Acid Brutal**-styled portfolio website for **Mohammed Sahim**, Artificial Intelligence & Machine Learning student and developer based in Karnataka, India.
 
 ---
 
 ## 🌟 Highlights
+- **Acid Brutal Design**: Dark black background, lime green (#A8FF00) accents, massive Bebas Neue display typography, grain texture overlays — inspired by editorial brutalist design.
+- **Smooth Animations**: Scroll-triggered reveals, glitch/scramble name effect, custom cursor follower, counter animations, skills matrix animated fill, parallax portrait tilt, magnetic CTA button, and scroll progress bar.
 - **Exact Resume Alignment**: Reflects Mohammed Sahim's complete background, degree (B.E. AI & ML at Yenepoya Institute of Technology), projects, skills, and certifications.
-- **Featured Projects**: Deep dives into **AgriSakhi** (AI-based agricultural assistant) and **Audexify** (AI-powered web accessibility auditor) with interactive live simulators.
+- **Featured Projects**: AgriSakhi (AI agricultural assistant) and Audexify (AI web accessibility auditor) with numbered editorial layout.
+- **Process Notes**: Research → Model → Build → Train → Deploy workflow sidebar.
+- **Skills Matrix**: Visual animated block grid + lime green Tools box + central quote.
 - **Verified Credentials**: NPTEL, Coursera, Cursa, and Simplilearn certifications.
 - **Leadership & Activities**: Event Coordinator at Pinnacle 2026 and AI Summit organizer.
-- **Modern Tech Aesthetic**: Neo-brutalist / cyber-editorial dark mode with neon emerald accents, light/dark theme switch, glassmorphism cards, and responsive layout.
-- **Interactive Features**: Category-filtered skills toolkit, one-click copy buttons for email/phone, responsive mobile navigation, interactive project demo modals, and direct download of Mohammed Sahim's official resume PDF.
+- **Fully Responsive**: Mobile-first with fullscreen overlay mobile nav.
 
 ---
 
